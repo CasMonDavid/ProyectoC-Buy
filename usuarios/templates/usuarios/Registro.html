@@ -20,12 +20,25 @@
             left: 0;
             background: rgba(18, 19, 21, 0.80);
         }
+
+        #subcabecera{
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 80px;
+            top: 1500px;
+            left: 0;
+            background: rgba(255, 255, 255, 0);
+        }
+
         .icono-letras {
             width: 120px;
             white-space: normal;
             display: block;
-            padding: 30px 0px 20px 20px;
         }
+
         .icono-logo {  
             width: 80px;
             white-space: normal;
@@ -71,14 +84,24 @@
             font-size: 20px;
         }
 
+        input[type="text"], textarea {
+            margin-bottom: 20px; 
+            background-color: rgb(212, 212, 212);
+            border: none;
+            border-radius: 5px;
+            width: 50%;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        textarea {
+            height: 150px; 
+        }
+
         .button-container {
             display: flex;
             justify-content: center;
             gap: 20px; 
-        }
-
-        .clasevacia {
-            margin: 10px;
         }
 
         button {
@@ -93,23 +116,6 @@
             height: 50px;
         }
 
-        .register-link {
-            margin-top: 2%;
-            color: orange;
-        }
-
-        #subcabecera{
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 80px;
-            margin-top: 20%;
-            left: 0;
-            background: rgba(255, 255, 255, 0);
-        }
-
         @media screen and (max-width: 1024px) and (min-width: 360px){
             .line {
                 width: 80%;  
@@ -120,68 +126,80 @@
             input[type="text"], textarea {
                 width: 80%;
             }
-            #subcabecera{
-                margin-top: 80%;
-            }
         }
     </style>
 </head>
 <body>
     <header id="cabecera">
         <a href="Inicio.html" style="display:flex; justify-content:center; align-items:center;">
-            <img class="icono-letras" src="Assets2/C-Buy.png" alt="Logo C-Buy">
+            <img class="icono-letras" src="Assets2/C-Buy.png" alt="">
             <img class="icono-logo" src="Assets2/C-Buy Logo.png" alt="">
         </a>
     </header>
 
     <div class="content">
-        <h1 class="title">Iniciar Sesión</h1>
-        <div class="line"></div>
-        
-        {{form.as_div}}
-    
-        <div class="button-container">
-            <button>Entrar</button>
-        </div>
-        <a href="{% url 'registro_Usuario' %}" class="register-link">¿No tienes una cuenta? Crea una aquí</a>
+
+        <form class="" method="POST">
+
+            <h1 class="title">Registro</h1>
+            <div class="line"></div>
+
+            {{form.as_div}} {% csrf_token %}
+
+            <div class="line"></div>
+
+            <div class="button-container">
+                <button>Cancelar</button>
+                <button>Guardar</button>
+            </div>
+
+        </form>
     </div>
 
     <script>
-        document.querySelector('.button-container button').addEventListener('click', function() {
-            var correo = document.querySelectorAll('.content input')[0].value;
-            var contrasena = document.querySelectorAll('.content input')[1].value;
+        document.querySelector('.button-container button:last-child').addEventListener('click', function() {
+            var nombre = document.querySelectorAll('.content input')[0].value;
+            var apellidos = document.querySelectorAll('.content input')[1].value;
+            var correo = document.querySelectorAll('.content input')[2].value;
+            var contrasena = document.querySelectorAll('.content input')[3].value;
+            var confirmarContrasena = document.querySelectorAll('.content input')[4].value;
+            var telefono = document.querySelectorAll('.content input')[5].value;
+            var direccion = document.querySelector('.content textarea').value;
     
             // Verificar si todos los campos están llenos
-            if (!correo || !contrasena) {
-                alert('Por favor, llena todos los campos antes de iniciar sesión.');
+            if (!nombre || !apellidos || !correo || !contrasena || !confirmarContrasena || !telefono || !direccion) {
+                alert('Por favor, llena todos los campos antes de registrarte.');
                 return;
             }
     
-            // Verificar si existe una cuenta con el correo electrónico ingresado
-            var usuario = localStorage.getItem(correo);
-            if (!usuario) {
-                alert('No existe una cuenta con este correo electrónico. Por favor, verifica e intenta de nuevo.');
+            // Verificar si las contraseñas coinciden
+            if (contrasena !== confirmarContrasena) {
+                alert('Las contraseñas no coinciden. Por favor, verifica e intenta de nuevo.');
                 return;
             }
     
-            usuario = JSON.parse(usuario);
-    
-            // Verificar si la contraseña es correcta
-            if (usuario.contrasena !== contrasena) {
-                alert('La contraseña es incorrecta. Por favor, verifica e intenta de nuevo.');
+            // Verificar si ya existe una cuenta con el mismo correo electrónico
+            if (localStorage.getItem(correo)) {
+                alert('Ya existe una cuenta con este correo electrónico. Por favor, intenta con otro.');
                 return;
-            }else{
-                // Iniciar sesión, ahora reconoce que usuario tiene la sesion abierta
-                let usuarioActivo = {
-                    nombre: usuario.nombre,
-                    correo: usuario.correo
-                }
-                localStorage.setItem("sesion", JSON.stringify(usuarioActivo));
-                alert('Has iniciado sesión con éxito, Bienvenido '+usuarioActivo.nombre+'.');
             }
+    
+            var usuario = {
+                nombre: nombre,
+                apellidos: apellidos,
+                correo: correo,
+                contrasena: contrasena,
+                telefono: telefono,
+                direccion: direccion,
+                productosCarrito: [] //Objeto que hará la función de guardar productos en el carrito
+            };
+
+            localStorage.setItem(correo, JSON.stringify(usuario));
+
+            alert('La cuenta se ha registrado con éxito.');
         });
+
     </script>
-    
 
     <header id="subcabecera">
         <a href="Inicio.html" style="display:flex; justify-content:center; align-items:center;">
