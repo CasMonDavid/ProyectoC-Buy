@@ -167,22 +167,23 @@
             var direccion = document.querySelector('.content textarea').value;
     
             // Verificar si todos los campos están llenos
-            if (!nombre || !apellidos || !correo || !contrasena || !confirmarContrasena || !telefono || !direccion) {
-                alert('Por favor, llena todos los campos antes de registrarte.');
-                return;
-            }
-    
+            //[YA NO ES NECESARIO]
+            //if (!nombre || !apellidos || !correo || !contrasena || !confirmarContrasena || !telefono || !direccion) {
+            //    alert('Por favor, llena todos los campos antes de registrarte.');
+            //    return;
+            //}
+    //
             // Verificar si las contraseñas coinciden
-            if (contrasena !== confirmarContrasena) {
-                alert('Las contraseñas no coinciden. Por favor, verifica e intenta de nuevo.');
-                return;
-            }
+            //if (contrasena !== confirmarContrasena) {
+            //    alert('Las contraseñas no coinciden. Por favor, verifica e intenta de nuevo.');
+            //    return;
+            //}
     
             // Verificar si ya existe una cuenta con el mismo correo electrónico
-            if (localStorage.getItem(correo)) {
-                alert('Ya existe una cuenta con este correo electrónico. Por favor, intenta con otro.');
-                return;
-            }
+            //if (localStorage.getItem(correo)) {
+            //    alert('Ya existe una cuenta con este correo electrónico. Por favor, intenta con otro.');
+            //    return;
+            //}
     
             var usuario = {
                 nombre: nombre,
