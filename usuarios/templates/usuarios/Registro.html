@@ -1,3 +1,4 @@
+{% load static %}
 <html>
 <head>
     <meta charset="UTF-8">
@@ -131,9 +132,9 @@
 </head>
 <body>
     <header id="cabecera">
-        <a href="Inicio.html" style="display:flex; justify-content:center; align-items:center;">
-            <img class="icono-letras" src="Assets2/C-Buy.png" alt="">
-            <img class="icono-logo" src="Assets2/C-Buy Logo.png" alt="">
+        <a href="{% url 'home' %}" style="display:flex; justify-content:center; align-items:center;">
+            <img class="icono-letras" src="{% static 'usuarios/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'usuarios/imagenes/C-Buy Logo.png' %}" alt="">
         </a>
     </header>
 
@@ -203,11 +204,12 @@
     </script>
 
     <header id="subcabecera">
-        <a href="Inicio.html" style="display:flex; justify-content:center; align-items:center;">
-            <img class="icono-letras" src="Assets2/C-Buy.png" alt="">
-            <img class="icono-logo" src="Assets2/C-Buy Logo.png" alt="">
+        <a href="{% url 'home' %}" style="display:flex; justify-content:center; align-items:center;">
+            <img class="icono-letras" src="{% static 'usuarios/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'usuarios/imagenes/C-Buy Logo.png' %}" alt="">
         </a>
     </header>
-
+    {% block contenido %}
+    {% endblock %}
 </body>
 </html>

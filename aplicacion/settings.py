@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
+import os
 import pymysql
 
 pymysql.version_info = (1, 4, 6, 'final', 0)
@@ -29,6 +30,11 @@ SECRET_KEY = 'django-insecure-r^41uel1i=&3kbil27gb01!n7fnd4^5rsu#6+&qffporvno8!$
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+ADMINS = (
+    ('DavidAlejandro', 'davidcm200803@gmail.com'),
+)
+
 
 
 # Application definition
@@ -124,7 +130,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'usuarios/static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

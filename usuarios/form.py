@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Esta clase "form" en python es solo para modificar la apariencia de los formularios en html: InicioDeSesion.html
 
 class formulario_Login_Usuario(forms.Form):
-    username = forms.CharField(label='Username:', widget=forms.TextInput(attrs={'class': 'clasevacia'}))
+    username = forms.EmailField(label='Correo email:', widget=forms.TextInput(attrs={'class': 'clasevacia'}))
     password = forms.CharField(label='Contraseña:', widget=forms.PasswordInput(attrs={'class': 'clasevacia'}))
 
 class formulario_Registro_Usuario(UserCreationForm):

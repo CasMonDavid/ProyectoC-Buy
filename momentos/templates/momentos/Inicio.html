@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -230,9 +231,9 @@
 </head>
 <body>
     <header id="cabecera">
-        <a href="Inicio.html">
-            <img class="icono-letras" src="Assets2/C-Buy.png" alt="">
-            <img class="icono-logo" src="Assets2/C-Buy Logo.png" alt="">
+        <a href="{% url 'home' %}">
+            <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
         </a>
         <div class="barra-busqueda">
             <div id="contenedor-busqueda">
@@ -243,18 +244,18 @@
         </div>
         <nav>
             <ul>
-                <li><a href="Registro.html">Registrarse</a></li>
-                <li><a href="Inicio de sesion.html"><img src="Assets2/Iniciar sesion.png" alt=""></a></li>
-                <li><a href="ConfiguracionPerfil.html"><span><img src="Assets2/Configuraciones.png" alt=""></span></a></li>
+                <li><a href="{% url 'registro_Usuario' %}">Registrarse</a></li>
+                <li><a href="{% url 'inicioDeSesion_usuario' %}"><img src="{% static 'momentos/imagenes/Iniciar sesion.png' %}" alt="Inicio de sesion"></a></li>
+                <li><a href="ConfiguracionPerfil.html"><span><img src="{% static 'momentos/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="Carrusel1">
+    <div class="Carrusel1"> 
         <div id="Cuadro1" style="width: 100%; height: 360px; left: 0px; top: 152px; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
-        <img style="width: 376px; height: 267px; left: 55%; top: 10%; position: absolute" src="Assets2/LaptoCarrusel.png" />
-        <img style="width: 80px; height: 80px; left: 5%; top: 40%; position: absolute; transform-origin: 0 0; " src="Assets2/FlechaLeft.png" />
-        <img style="width: 80px; height: 80px; right: 5%; top: 40%; position: absolute;  transform-origin: 0 0; " src="Assets2/FlechaRight.png" />
+        <img style="width: 376px; height: 267px; left: 55%; top: 10%; position: absolute" src="{% static 'momentos/imagenes/LaptoCarrusel.png' %}" />
+        <img style="width: 80px; height: 80px; left: 5%; top: 40%; position: absolute; transform-origin: 0 0; " src="{% static 'momentos/imagenes/FlechaLeft.png' %}" />
+        <img style="width: 80px; height: 80px; right: 5%; top: 40%; position: absolute;  transform-origin: 0 0; " src="{% static 'momentos/imagenes/FlechaRight.png' %}" />
         <div style="width: 400px; height: 250px; left: 20%; top: 20%; position: absolute"><span style="color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">
         Oferta exclusica para ti<br/></span><span style="color: white; font-size: 28px; font-family: Inter; font-weight: 600; text-decoration: line-through; line-height: 42px; word-wrap: break-word">
         $15,800 </span><span style="color: white; font-size: 28px; font-family: Inter; font-weight: 600; line-height: 42px; word-wrap: break-word"> </span><span style="color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">
@@ -268,15 +269,15 @@
 
     <div class="Carrusel2">
         <div style="width: 45%; height: 400px; left: 2%;  top: 552px; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)">
-            <img style="width: 140px; height: 140px; left: 5%; top: 30%; position: absolute" src="Assets2/Play5.png" />
+            <img style="width: 140px; height: 140px; left: 5%; top: 30%; position: absolute" src="{% static 'momentos/imagenes/Play5.png' %}" />
             <div style="left: 5%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">PlayStation 5</div>
-            <img style="width: 140px; height: 140px; margin-left: 39%; margin-right: 39%; top: 30%; position: absolute" src="Assets2/Control.png" />
+            <img style="width: 140px; height: 140px; margin-left: 39%; margin-right: 39%; top: 30%; position: absolute" src="{% static 'momentos/imagenes/Control.png' %}" />
             <div style="margin-left: 39%; margin-right: 39%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Control de Xbox</div>
-            <img style="width: 140px; height: 140px; right: 5%; top: 30%; position: absolute" src="Assets2/Switch.png" />
+            <img style="width: 140px; height: 140px; right: 5%; top: 30%; position: absolute" src="{% static 'momentos/imagenes/Switch.png' %}" />
             <div style="right: 6%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Nintendo Switch</div>
         </div>
         <div style="width: 40px; height: 40px; left: 42%; top: 900px; position: absolute; background: #EF8B1B; border-radius: 9999px">
-        <img style="width: 18px; height: 18px; left: 25%; top: 10px; position: absolute" src="Assets2/Mas.png" />
+        <img style="width: 18px; height: 18px; left: 25%; top: 10px; position: absolute" src="{% static 'momentos/imagenes/Mas.png' %}" />
         </div>  
         <div style="width: 45%; height: 50px; left: 2%; top: 564px; position: absolute; text-align: center"><span style="color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">Lo más vendido en Videojuegos<br/><br/></span><span style="color: white; font-size: 32px; font-family: Inter; font-weight: 600; word-wrap: break-word"><br/></span></div>
     </div>
@@ -284,13 +285,13 @@
     <div class="Carrusel3">
         <div style="width: 45%; height: 400px; right: 2%;  top: 552px; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)">
             <div style="width: 45%; height: 400px; position: absolute; background: rgba(255, 255, 255, 0);">
-                <img style="width: 120px; height: 100px; left: 40%; top: 40%; position: absolute" src="Assets2/Celulares.png" />
-                <img style="width: 120px; height: 100px; left: 90%; top: 40%; position: absolute" src="Assets2/Audifonos.png" />
-                <img style="width: 120px; height: 100px; left: 140%; top: 40%; position: absolute" src="Assets2/Reloj.png" />
+                <img style="width: 120px; height: 100px; left: 40%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Celulares.png' %}" />
+                <img style="width: 120px; height: 100px; left: 90%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Audifonos.png' %}" />
+                <img style="width: 120px; height: 100px; left: 140%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Reloj.png' %}" />
             </div>
-        </div>
+        </div> 
         <div style="width: 40px; height: 40px; right: 4%; top: 900px; position: absolute; background: #EF8B1B; border-radius: 9999px">
-        <img style="width: 18px; height: 18px; right: 25%; top: 10px; position: absolute" src="Assets2/Mas.png" />
+        <img style="width: 18px; height: 18px; right: 25%; top: 10px; position: absolute" src="{% static 'momentos/imagenes/Mas.png' %}" />
         </div>
         <div style="width: 45%; height: 90px; right: 2%; top: 564px; position: absolute; text-align: center; color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">Ahorra en equipos reacondicionados</div>
     </div>
@@ -299,28 +300,28 @@
         <div id="Cuadro2" style="width: 100%; height: 360px; left: 0px; top: 1050px; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
         <div style="margin-left: 40%; margin-right: 20%; top: 30px; position: absolute; color: white; font-size: 32px; font-family: Inter; font-weight: 300; line-height: 48px; word-wrap: break-word">Ofertas electrónicas</div>
         
-        <img style="width: 200px; height: 228px; left: 15%; top: 90px; position: absolute" src="Assets2/Electronica1.png" />
+        <img style="width: 200px; height: 228px; left: 15%; top: 90px; position: absolute" src="{% static 'momentos/imagenes/Electronica1.png' %}" />
         <div style="left: 15%; top: 325px; position: absolute; color: #EF8B1B; font-size: 15px; font-family: Inter; font-weight: 600; line-height: 24.75px; word-wrap: break-word">Ofertas hasta un
             <div style="width: 70px; height: 25px; left: 130px; top: 0; position: absolute; background: #EF8B1B">
                 <div style="left: 30%; top: 0px;  position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 800; line-height: 24.75px; word-wrap: break-word">-35%</div>
             </div>
         </div>
 
-        <img style="width: 300px; height: 228px; left: 35%; top: 90px; position: absolute" src="Assets2/Electronica2.png" />
+        <img style="width: 300px; height: 228px; left: 35%; top: 90px; position: absolute" src="{% static 'momentos/imagenes/Electronica2.png' %}" />
         <div style="left: 35%; top: 325px; position: absolute; color: #EF8B1B; font-size: 15px; font-family: Inter; font-weight: 600; line-height: 24.75px; word-wrap: break-word">Ofertas hasta un
             <div style="width: 70px; height: 25px; left: 130px; top: 0; position: absolute; background: #EF8B1B">
                 <div style="left: 30%; top: 0px;  position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 800; line-height: 24.75px; word-wrap: break-word">-37%</div>
             </div>
         </div>
 
-        <img style="width: 300px; height: 228px; left: 63%; top: 90px; position: absolute" src="Assets2/Electronica3.png" />
+        <img style="width: 300px; height: 228px; left: 63%; top: 90px; position: absolute" src="{% static 'momentos/imagenes/Electronica3.png' %}" />
         <div style="left: 63%; top: 325px; position: absolute; color: #EF8B1B; font-size: 15px; font-family: Inter; font-weight: 600; line-height: 24.75px; word-wrap: break-word">Ofertas hasta un
             <div style="width: 70px; height: 25px; left: 130px; top: 0; position: absolute; background: #EF8B1B">
                 <div style="left: 30%; top: 0px;  position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 800; line-height: 24.75px; word-wrap: break-word">-55%</div>
             </div>
-        </div>
-        <img style="width: 80px; height: 80px; left: 5%; top: 40%; position: absolute; transform-origin: 0 0; " src="Assets2/FlechaLeft.png" />
-        <img style="width: 80px; height: 80px; right: 5%; top: 40%; position: absolute;  transform-origin: 0 0; " src="Assets2/FlechaRight.png" />
+        </div> 
+        <img style="width: 80px; height: 80px; left: 5%; top: 40%; position: absolute; transform-origin: 0 0; " src="{% static 'momentos/imagenes/FlechaLeft.png' %}" />
+        <img style="width: 80px; height: 80px; right: 5%; top: 40%; position: absolute;  transform-origin: 0 0; " src="{% static 'momentos/imagenes/FlechaRight.png' %}" />
         
         </div>
     </div>
@@ -328,15 +329,15 @@
     <div class="Carrusel5">
         <div style="width: 45%; height: 400px; left: 2%;  top: 1450px; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)">
             <div style="width: 45%; height: 400px; position: absolute; background: rgba(255, 255, 255, 0);">
-                <img style="width: 120px; height: 100px; left: 40%; top: 40%; position: absolute" src="Assets2/Addidas.png" />
+                <img style="width: 120px; height: 100px; left: 40%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Addidas.png' %}" />
                 <div style="left: 40%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Adidas</div>
-                <img style="width: 120px; height: 100px; left: 90%; top: 40%; position: absolute" src="Assets2/Camisa.png" />
+                <img style="width: 120px; height: 100px; left: 90%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Camisa.png' %}" />
                 <div style="left: 90%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Nike</div>
-                <img style="width: 120px; height: 100px; left: 140%; top: 40%; position: absolute" src="Assets2/Sudadera.png" />
+                <img style="width: 120px; height: 100px; left: 140%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Sudadera.png' %}" />
                 <div style="left: 140%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Columbia</div>
             </div>
         <div style="width: 40px; height: 40px; right: 4%; top: 85%; position: absolute; background: #EF8B1B; border-radius: 9999px">
-        <img style="width: 18px; height: 18px; right: 25%; top: 10px; position: absolute" src="Assets2/Mas.png" />
+        <img style="width: 18px; height: 18px; right: 25%; top: 10px; position: absolute" src="{% static 'momentos/imagenes/Mas.png' %}" />
         </div>
         <div style="width: 45%; height: 90px; left:30%; top: 5%; position: absolute; text-align: center; color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">Ropa deportiva desde $200
         </div>
@@ -346,15 +347,15 @@
     <div class="Carrusel6">
         <div style="width: 45%; height: 400px; right: 2%;  top: 1450px; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25)">
             <div style="width: 45%; height: 400px; position: absolute; background: rgba(255, 255, 255, 0);">
-                <img style="width: 120px; height: 100px; left: 40%; top: 40%; position: absolute" src="Assets2/Peine.png" />
+                <img style="width: 120px; height: 100px; left: 40%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Peine.png' %}" />
                 <div style="left: 40%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Accesorios</div>
-                <img style="width: 120px; height: 100px; left: 90%; top: 40%; position: absolute" src="Assets2/Crema.png" />
+                <img style="width: 120px; height: 100px; left: 90%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Crema.png' %}" />
                 <div style="left: 90%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Cabello</div>
-                <img style="width: 120px; height: 100px; left: 140%; top: 40%; position: absolute" src="Assets2/Piel.png" />
+                <img style="width: 120px; height: 100px; left: 140%; top: 40%; position: absolute" src="{% static 'momentos/imagenes/Piel.png' %}" />
                 <div style="left: 140%; top: 65%; position: absolute; color: white; font-size: 16.50px; font-family: Inter; font-weight: 300; line-height: 24.75px; word-wrap: break-word">Piel</div>
             </div>
         <div style="width: 40px; height: 40px; right: 4%; top: 85%; position: absolute; background: #EF8B1B; border-radius: 9999px">
-        <img style="width: 18px; height: 18px; right: 25%; top: 10px; position: absolute" src="Assets2/Mas.png" />
+        <img style="width: 18px; height: 18px; right: 25%; top: 10px; position: absolute" src="{% static 'momentos/imagenes/Mas.png' %}" />
         </div>
         <div style="width: 45%; height: 90px; left:30%; top: 5%; position: absolute; text-align: center; color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">Ofertas hasta el </span><span style="color: #EF8B1B; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word">30%</span><span style="color: white; font-size: 32px; font-family: Inter; font-weight: 600; line-height: 48px; word-wrap: break-word"> en belleza</span></div>
         </div>
@@ -371,7 +372,7 @@
                 $1,065</span><span style="color: #EF8B1B; font-size: 18px; font-family: Inter; font-weight: 600; line-height: 25.20px; word-wrap: break-word">
                     -20% OFF<br/>ENVIO GRATIS<br/></span><span style="color: white; font-size: 18px; font-family: Inter; font-weight: 600; line-height: 24px; word-wrap: break-word">
                         Control inalambrico - Control de Xbox One <br/></span></div>
-            <img style="width: 220px; height: 200px; left: 6.5%; top: 5%; position: absolute" src="Assets2/Control.png" />
+            <img style="width: 220px; height: 200px; left: 6.5%; top: 5%; position: absolute" src="{% static 'momentos/imagenes/Control.png' %}" />
         </div>
 
         <div style="width: 250px; height: 350px; left: 40%; top: 20%; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 10px">
@@ -379,7 +380,7 @@
                 $659</span><span style="color: #EF8B1B; font-size: 18px; font-family: Inter; font-weight: 600; line-height: 25.20px; word-wrap: break-word">
                     -34% OFF<br/><br/></span><span style="color: white; font-size: 18px; font-family: Inter; font-weight: 600; line-height: 24px; word-wrap: break-word">
                         HyperX Cloud Stinger 2022 - Audifonos <br/></span></div>
-            <img style="width: 220px; height: 200px; left: 6.5%; top: 5%; position: absolute" src="Assets2/AudifonosX.png" />
+            <img style="width: 220px; height: 200px; left: 6.5%; top: 5%; position: absolute" src="{% static 'momentos/imagenes/AudifonosX.png' %}" />
         </div>
         
         <div style="width: 250px; height: 350px; left: 65%; top: 20%; position: absolute; background: rgba(18, 19, 21, 0.80); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 10px">
@@ -387,12 +388,12 @@
                 $412</span><span style="color: #EF8B1B; font-size: 18px; font-family: Inter; font-weight: 600; line-height: 25.20px; word-wrap: break-word">
                     -19% OFF<br/>ENVIO GRATIS<br/></span><span style="color: white; font-size: 18px; font-family: Inter; font-weight: 600; line-height: 24px; word-wrap: break-word">
                         MageGee mini teclado para juegos de 60% <br/></span></div>
-            <img style="width: 220px; height: 200px; left: 6.5%; top: 5%; position: absolute" src="Assets2/Teclado.png" />
+            <img style="width: 220px; height: 200px; left: 6.5%; top: 5%; position: absolute" src="{% static 'momentos/imagenes/Teclado.png' %}" />
         </div>
-        
 
-        <img style="width: 80px; height: 80px; left: 5%; top: 40%; position: absolute; transform-origin: 0 0; " src="Assets2/FlechaLeft.png" />
-        <img style="width: 80px; height: 80px; right: 5%; top: 40%; position: absolute;  transform-origin: 0 0; " src="Assets2/FlechaRight.png" />
+
+        <img style="width: 80px; height: 80px; left: 5%; top: 40%; position: absolute; transform-origin: 0 0; " src="{% static 'momentos/imagenes/FlechaLeft.png' %}" />
+        <img style="width: 80px; height: 80px; right: 5%; top: 40%; position: absolute;  transform-origin: 0 0; " src="{% static 'momentos/imagenes/FlechaRight.png' %}" />
         
         </div>
     </div>
@@ -400,11 +401,13 @@
 
     
     <div style="width: 100%; height: 300px; left: 0px; top: 2674px; position: absolute; background: rgba(18, 19, 21, 0.80); display: flex; align-items: flex-start; justify-content: center;">
-        <img class="icono-letras" src="Assets2/C-Buy.png" alt="">
-        <img class="icono-logo" src="Assets2/C-Buy Logo.png" alt="">
+        <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+        <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
     </div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    {% block contenido %}
+    {% endblock %}
 </body>
 </html>
