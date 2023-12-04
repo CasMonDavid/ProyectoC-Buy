@@ -1,0 +1,609 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+   
+
+    <title>Detalles del producto</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /*HEADER*/
+        #cabecera {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            top: 0;
+            left: 0;
+            background: rgba(18, 19, 21, 0.80);
+        }
+        .icono-letras {
+            float: left;
+            width: 120px;
+            white-space: normal;
+            display: block;
+            padding: 30px 0px 20px 20px;
+        }
+        .icono-logo {  
+            float: left;
+            width: 80px;
+            white-space: normal;
+            display: block;
+        }
+        .barra-busqueda {
+            background-color: white;
+            width: 50%;
+            top: 25%;
+            float: left;
+            border: none;
+            border-radius: 10px;
+        }
+        #contenedor-busqueda button {
+            position: relative;
+            float: left;
+            width: 17%;
+            height: 40px;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            flex-shrink: 0;
+            font-size: 18px;
+            color: white;
+        }
+        #contenedor-busqueda button img {
+            position: absolute;
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+        }
+        #contenedor-busqueda button:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #contenedor-busqueda input {
+            float: left;
+            position: absolute;
+            margin: 0 auto;
+            width: 41%;
+            height: 50%;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 10px;
+            background: none;
+        }
+        #contenedor-busqueda input:focus {
+            outline: none;
+            border: 0;
+        }
+        .icono-lupa {
+            float: right;
+            padding: 10px 10px 10px 10px;
+        }
+        .icono-carrito {
+            float: left;
+            color: black;
+            margin-left: 10%;
+        }
+        #cabecera nav {
+            display: flex;
+            align-items: center;
+        }
+        #cabecera nav ul {
+            float: right;
+            margin: auto;
+            list-style-type: none;
+        }
+        #cabecera nav li {
+            display: inline;
+            margin-right: 15px;
+        }
+        #cabecera nav li img {
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+            background-color: #EF8B1B;
+        }
+        #cabecera nav li a {
+            text-decoration-line: none;
+            color: white;
+            font-weight: 500;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+        }
+        #cabecera nav li a:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #cabecera nav li a:hover img {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+
+        /*MAIN*/
+        #main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 90px;
+        }
+        #migajas-pan {
+            width: 70%;
+            margin-left: 2%;
+        }
+        #migajas-pan a {
+            text-decoration-line: none;
+        }
+
+        #producto {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 10px 0px;
+        }
+
+        #producto > img {
+            width: 400px;
+            border: 1px solid black;
+        }
+
+        #pro-perspectiva {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-right: 2%;
+        }
+        #pro-perspectiva img {
+            width: 60%;
+            border: 1px solid black;
+        }
+
+        #elementos-producto {
+            display: flex;
+            flex-direction: column;
+            margin: 10px 10px;
+        }
+
+        #nombre-prod {
+            margin: 10px;
+        }
+
+        .estrellas{
+            margin: 10px 10px;
+        }
+        #precio {
+            display: flex;
+            align-items: center;
+            margin: 10px 10px;
+        }
+        #precio h3 {
+            color: #EF8B1B;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .liston {
+            text-align: center;
+            border-radius: 15px 0px;
+            border: 1.5px solid #EF8B1B;
+            box-shadow: 2px 4px 4px 0px #EF8B1B;
+            color: black;
+            font-size: large;
+            font-weight: bold;
+            padding: 2px;
+            margin-left: 10px;
+        }
+
+        #cantidad-botones {
+            display: flex;
+            align-items: center;
+        }
+        #cantidad-botones p {
+            border: 0.5px solid #000;
+            background: #FFF;
+            width: 50px;
+            height: 20px;
+            text-align: center;
+        }
+        #cantidad-botones #mas {
+            border-radius: 0px 15px 15px 0px;
+            border-top: 0.5px solid #000;
+            border-right: 0.5px solid #000;
+            border-bottom: 0.5px solid #000;
+            background: #FFF;
+            width: 40px;
+            height: 22px;
+        }
+        #cantidad-botones #menos{
+            border-radius: 15px 0px 0px 15px;
+            border-top: 0.5px solid #000;
+            border-bottom: 0.5px solid #000;
+            border-left: 0.5px solid #000;
+            background: rgba(65, 66, 68, 0.25);
+            width: 40px;
+            height: 22px;
+        }
+
+        #opciones-prod {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        #opc-comprar {
+            border-radius: 10px;
+            width: 30%;
+            margin-bottom: 7px;
+            padding: 10px 0px;
+            font-size: larger;
+            text-align: center;
+            background: #EF8B1B;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            text-decoration-line: none;
+            color: white;
+        }
+        #opc-agregar {
+            border-radius: 15px;
+            width: 30%;
+            padding: 10px 0px;
+            font-size: larger;
+            text-align: center;
+            border: 1px solid #EF8B1B;
+            text-decoration-line: none;
+            color: #000;
+        }
+        #descripcion {
+            display: flex;
+            flex-direction: column;
+            border-radius: 10px;
+            background: #414244;
+            color: white;
+            width: 60%;
+            padding: 30px;
+        }
+        #descripcion p {
+            margin: 10px 0px;
+        }
+        #descripcion ul {
+            padding-left: 20px;
+        }
+
+        #comentarios-prod {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-top: 1px solid #414244;
+            margin: 20px 0px;
+        }
+        #comentarios-prod h1{
+            margin: 15px 0px;
+        }
+        .comentario {
+            border-radius: 10px;
+            background: rgba(18, 19, 21, 0.80);
+            box-shadow: 0px 2px 4px 2px rgba(30, 30, 30, 0.51);
+            color: white;
+            width: 98%;
+            margin: 10px 5px;
+        }
+        .contenido-total {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 10px 5px;
+        }
+
+        /*Baner de abajo*/
+        #pies {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            text-align: center;
+            background-color: rgba(18, 19, 21,0.8);
+            width: 100%;
+            height: 50px;
+            color: #866CBA;
+            font-weight: lighter;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        /**/
+
+        @media screen and (max-width: 1024px) and (min-width: 360px){
+
+            #main {
+                margin-top: 200px;
+            }
+
+            #cabecera {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 100%;
+                height: 200px;
+                top: 0;
+                left: 0;
+                background: rgba(18, 19, 21, 0.80);
+            }
+            .barra-busqueda {
+                background-color: white;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+            }
+            #contenedor-busqueda button {
+                position: relative;
+                float: left;
+                width: 30%;
+                height: 40px;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                flex-shrink: 0;
+                font-size: 18px;
+                color: white;
+            }
+            #contenedor-busqueda button:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #contenedor-busqueda input {
+                position: absolute;
+                margin: 0 auto;
+                width: 60%;
+                height: 40px;
+                flex-shrink: 0;
+                border: none;
+                border-radius: 10px;
+                background: none;
+            }
+            #contenedor-busqueda input:focus {
+                outline: none;
+                border: 0;
+            }
+            .icono-lupa {
+                float: right;
+                padding: 10px 10px 10px 10px;
+            }
+            .icono-carrito {
+                float: left;
+                color: black;
+                margin-left: 10%;
+            }
+            #cabecera nav {
+                margin: 25px 0px;
+            }
+            #cabecera nav ul {
+                list-style-type: none;
+            }
+            #cabecera nav li {
+                margin-right: 15px;
+            }
+            #cabecera nav li img {
+                background-color: #EF8B1B;
+            }
+            #cabecera nav li a {
+                text-decoration-line: none;
+                color: white;
+                font-weight: 500;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                padding: 15px 20px;
+                margin: 10px 5px;
+            }
+            #cabecera nav li a:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #cabecera nav li a:hover img {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+
+            #producto {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                margin: 10px 0px;
+            }
+
+            #producto > img {
+                width: 300px;
+                border: 1px solid black;
+            }
+
+            #opciones-prod {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            #opc-comprar {
+                width: 90%;
+                margin-top: 10px;
+            }
+            #opc-agregar{   
+                width: 90%;
+            }
+
+            #descripcion {
+                display: flex;
+                flex-direction: column;
+                border-radius: 10px;
+                background: #414244;
+                color: white;
+                width: 80%;
+                padding: 30px;
+            }
+            #pro-perspectiva {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin-bottom: 2%;
+            }
+            #pro-perspectiva img {
+                width: 40%;
+                border: 1px solid black;
+            }
+            #cantidad{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="cabecera">
+        <a href="{% url 'home' %}">
+            <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
+        </a>
+        <div class="barra-busqueda">
+            <div id="contenedor-busqueda">
+                <a href="{% url 'carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
+                <input type="text" placeholder="Buscar..." value="Computadoras">
+                <a href="{% url 'resultadoBusqueda' %}"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'registro_Usuario' %}">Registrarse</a></li>
+                <li><a href="{% url 'inicioDeSesion_usuario' %}"><img src="{% static 'momentos/imagenes/Iniciar sesion.png' %}" alt=""></a></li>
+                <li><a href="{% url 'configuracion_usuario' %}"><span><img src="{% static 'momentos/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <article id="main">
+        <div id="migajas-pan">
+            <h3><a href="{% url 'resultadoBusqueda' %}"><i class="fa fa-chevron-left" aria-hidden="true"></i><i class="fa fa-chevron-left" aria-hidden="true"></i>  Volver a resultados</a></h3>
+        </div>
+
+        <div id="producto">
+            <div id="pro-perspectiva">
+                <img src="{% static 'momentos/imagenes/Computadora (1).png' %}" alt="">
+                <img src="{% static 'momentos/imagenes/Computadora (1).png' %}" alt="">
+            </div>
+            <img src="{% static 'momentos/imagenes/Computadora (1).png' %}" alt="">
+            <div id="elementos-producto">
+                <div id="nombre-prod">
+                    <h2>Laptop hp-n305Hdh 16GB RAM Intel core 9! 1TB Gris</h2>
+                </div>
+                <div class="estrellas">
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                </div>
+                <div id="precio" class="">
+                    <h3>$8,250</h3>
+                    <span class="liston">Ahorro $2,750 (25%)</span>
+                </div>
+                <div id="cantidad">
+                    <h3>Cantidad</h3>
+                    <div id="cantidad-botones">
+                        <button id="menos"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                        <p>1</p>
+                        <button id="mas"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div id="opciones-prod">
+                    <a id="opc-comprar" href="">Comprar</a> 
+                    <a id="opc-agregar" href="{% url 'carrito_usuario' %}">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="descripcion">
+            <h2>Descripción del producto</h2>
+            <p>Por su diseño ligero y capacidad, la mejor opción de compra es la nueva Laptop hp-n305Hdh.
+            Su gran potencia hará que tus tareas tomen otro nivel de fluidez, podrá realizar tus tareas y pasatiempos favoritos a la velocidad que merecen ser puestos.</p>
+            <ul>
+                <li>16GB de RAM</li>
+                <li>1TB de almacenamiento</li>
+                <li>Procesador Intel Core !9</li>
+                <li>Tamaño de pantalla de 14</li>
+                <li>Windows 11</li>
+                <li>Color gris</li>
+            </ul>
+        </div>
+
+        <div id="comentarios-prod">
+            <h1>Opiniones de los clientes</h1>
+            <div class="comentario">
+                <div class="contenido-total"> 
+                    <img src="{% static 'momentos/imagenes/Ellipse 11.png' %}" alt=""> 
+                    <div class="comentario-cont-izq">
+                        <h3>Geraldo Cota</h3>
+                        <div class="estrellas">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <p>No le pongo 5 estrellas porque tardó un poco más del tiempo debido, pero todo bien aún así</p>
+                    </div>
+                </div>
+            </div>
+            <div class="comentario">
+                <div class="contenido-total">
+                    <img src="{% static 'momentos/imagenes/Ellipse 11.png' %}" alt="">
+                    <div class="comentario-cont-izq">
+                        <h3>Daniel Palomares</h3>
+                        <div class="estrellas">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                        <p>Muy buen producto, cuando yo lo compre no tenia descuento lastima pero si alguien se la esta pensando es ahora ¡No se arrepentiran!</p>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+        <footer id="pies">
+            <a href="{% url 'home' %}">
+                <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+                <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo 1.png' %}" alt="">
+            </a>
+        </footer>
+    </article>
+    {% block contenido %}
+    {% endblock %}
+</body>
+</html>

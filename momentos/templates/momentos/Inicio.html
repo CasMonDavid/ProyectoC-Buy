@@ -237,16 +237,16 @@
         </a>
         <div class="barra-busqueda">
             <div id="contenedor-busqueda">
-                <a href="Carrito.html"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
+                <a href="{% url 'carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
                 <input type="text" placeholder="Buscar..." value="Computadoras">
-                <a href="ResultadoBusqueda.html"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
+                <a href="{% url 'resultadoBusqueda' %}"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
             </div>
         </div>
         <nav>
             <ul>
                 <li><a href="{% url 'registro_Usuario' %}">Registrarse</a></li>
                 <li><a href="{% url 'inicioDeSesion_usuario' %}"><img src="{% static 'momentos/imagenes/Iniciar sesion.png' %}" alt="Inicio de sesion"></a></li>
-                <li><a href="ConfiguracionPerfil.html"><span><img src="{% static 'momentos/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
+                <li><a href="{% url 'configuracion_usuario' %}"><span><img src="{% static 'momentos/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
             </ul>
         </nav>
     </header>

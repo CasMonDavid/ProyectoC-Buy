@@ -7,7 +7,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 urlpatterns = [
     path('InicioDeSesion/', views.login_form, name='inicioDeSesion_usuario'),
     path('Registro/', views.registro_form, name='registro_Usuario'),
-    path('CerrarSesion/', LogoutView.as_view, name='cerrarSesion_usuario')
+    path('CerrarSesion/', LogoutView.as_view, name='cerrarSesion_usuario'),
+    path('Configuracion/', views.configuracionUsuario_form, name='configuracion_usuario')
 ]
 
 # metodo para subir imagenes

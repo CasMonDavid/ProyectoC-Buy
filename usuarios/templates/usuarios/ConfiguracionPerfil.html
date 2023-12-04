@@ -1,0 +1,632 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+   
+
+    <title>Detalles del producto</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /*HEADER*/
+        #cabecera {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            top: 0;
+            left: 0;
+            background: rgba(18, 19, 21, 0.80);
+        }
+        .icono-letras {
+            float: left;
+            width: 120px;
+            white-space: normal;
+            display: block;
+            padding: 30px 0px 20px 20px;
+        }
+        .icono-logo {  
+            float: left;
+            width: 80px;
+            white-space: normal;
+            display: block;
+        }
+        .barra-busqueda {
+            background-color: white;
+            width: 50%;
+            top: 25%;
+            float: left;
+            border: none;
+            border-radius: 10px;
+        }
+        #contenedor-busqueda button {
+            position: relative;
+            float: left;
+            width: 17%;
+            height: 40px;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            flex-shrink: 0;
+            font-size: 18px;
+            color: white;
+        }
+        #contenedor-busqueda button img {
+            position: absolute;
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+        }
+        #contenedor-busqueda button:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #contenedor-busqueda input {
+            float: left;
+            position: absolute;
+            margin: 0 auto;
+            width: 41%;
+            height: 50%;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 10px;
+            background: none;
+        }
+        #contenedor-busqueda input:focus {
+            outline: none;
+            border: 0;
+        }
+        .icono-lupa {
+            float: right;
+            padding: 10px 10px 10px 10px;
+        }
+        .icono-carrito {
+            float: left;
+            color: black;
+            margin-left: 10%;
+        }
+        #cabecera nav {
+            display: flex;
+            align-items: center;
+        }
+        #cabecera nav ul {
+            float: right;
+            margin: auto;
+            list-style-type: none;
+        }
+        #cabecera nav li {
+            display: inline;
+            margin-right: 15px;
+        }
+        #cabecera nav li img {
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+            background-color: #EF8B1B;
+        }
+        #cabecera nav li a {
+            text-decoration-line: none;
+            color: white;
+            font-weight: 500;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+        }
+        #cabecera nav li a:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #cabecera nav li a:hover img {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+
+        /*MAIN*/
+        #main {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            margin-top: 90px;
+            margin-bottom: 10px;
+        }
+        
+        #configuracion-perfil {
+            width: 60%;
+        }
+        #configuracion-perfil {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(18, 19, 21, 0.80);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            color: white;
+        }
+        #espacio-informacion-cli {
+            border-top: 2px solid #EF8B1B;
+            margin: 10px 0px;
+            padding: 10px 0px;
+        }
+        #espacio-informacion-cli input {
+            border-radius: 10px;
+            background: #B8B8B8;
+            height: 30px;
+            width: 55%;
+            padding-left: 7px;
+            font-size: large;
+        }
+        #entrada-numero {
+            display: flex;
+            align-items: center;
+        }
+        #entrada-numero button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            background: #EF8B1B;
+            height: 30px;
+            width: 10%;
+        }
+        #entrada-numero img {
+            width: 25px;
+            margin-left: 5px;
+        }
+        #espacio-password {
+            border-top: 2px solid #EF8B1B;
+            margin: 10px 0px;
+            padding: 10px 0px;
+        }
+        #espacio-password input {
+            border-radius: 10px;
+            background: #B8B8B8;
+            height: 30px;
+            width: 55%;
+            padding-left: 7px;
+            font-size: large;
+        }
+        #espacio-direccion-envio {
+            display: flex;
+            flex-direction: column;
+            border-top: 2px solid #EF8B1B;
+            margin: 10px 0px;
+            padding: 10px 0px;
+        }
+        #espacio-direccion-envio input {
+            border-radius: 10px;
+            background: #B8B8B8;
+            height: 90px;
+            width: 96%;
+            padding-left: 7px;
+            font-size: large;
+            text-align: start;
+        }
+
+        #configuracion-carta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 20%;
+            border-radius: 10px;
+            background: rgba(18, 19, 21, 0.80);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            color: white;
+            padding: 10px;
+        }
+        #configuracion-carta > img {
+            margin: 20px 0px;
+        }
+        #configuracion-carta h4 {
+            font-weight: 300;
+        }
+        #configuracion-carta button {
+            width: 80%;
+            height: 50px;
+            font-size: larger;
+            border-radius: 10px;
+            background: #EF8B1B;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            color: white;
+        }
+        #mexico-bandera {
+            width: 70px;
+            height: 70px;
+        }
+        #num-entrada {
+            width: 45% !important;
+        }
+
+        /*Baner de abajo*/
+        #pies {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            text-align: center;
+            background-color: rgba(18, 19, 21,0.8);
+            width: 100%;
+            height: 50px;
+            color: #866CBA;
+            font-weight: lighter;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        /**/
+
+        @media screen and (max-width: 1079px) and (min-width: 1024px){
+
+            #main {
+                margin-top: 220px;
+            }
+
+            #cabecera {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 100%;
+                height: 200px;
+                top: 0;
+                left: 0;
+                background: rgba(18, 19, 21, 0.80);
+            }
+            .barra-busqueda {
+                background-color: white;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+            }
+            #contenedor-busqueda button {
+                position: relative;
+                float: left;
+                width: 30%;
+                height: 40px;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                flex-shrink: 0;
+                font-size: 18px;
+                color: white;
+            }
+            #contenedor-busqueda button:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #contenedor-busqueda input {
+                position: absolute;
+                margin: 0 auto;
+                width: 60%;
+                height: 40px;
+                flex-shrink: 0;
+                border: none;
+                border-radius: 10px;
+                background: none;
+            }
+            #contenedor-busqueda input:focus {
+                outline: none;
+                border: 0;
+            }
+            .icono-lupa {
+                float: right;
+                padding: 10px 10px 10px 10px;
+            }
+            .icono-carrito {
+                float: left;
+                color: black;
+                margin-left: 10%;
+            }
+            #cabecera nav {
+                margin: 25px 0px;
+            }
+            #cabecera nav ul {
+                list-style-type: none;
+            }
+            #cabecera nav li {
+                margin-right: 15px;
+            }
+            #cabecera nav li img {
+                background-color: #EF8B1B;
+            }
+            #cabecera nav li a {
+                text-decoration-line: none;
+                color: white;
+                font-weight: 500;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                padding: 15px 20px;
+                margin: 10px 5px;
+            }
+            #cabecera nav li a:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #cabecera nav li a:hover img {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+
+            /*Baner de abajo*/
+            #pies {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                bottom: 0;
+                left: 0;
+                margin: 0;
+                text-align: center;
+                background-color: rgba(18, 19, 21,0.8);
+                width: 100%;
+                height: 50px;
+                color: #866CBA;
+                font-weight: lighter;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+            /**/
+        }
+
+        @media screen and (max-width: 1023px) and (min-width: 280px){
+            #main {
+                margin-top: 220px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            #cabecera {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 100%;
+                height: 200px;
+                top: 0;
+                left: 0;
+                background: rgba(18, 19, 21, 0.80);
+            }
+            .barra-busqueda {
+                background-color: white;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+            }
+            #contenedor-busqueda button {
+                position: relative;
+                float: left;
+                width: 30%;
+                height: 40px;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                flex-shrink: 0;
+                font-size: 18px;
+                color: white;
+            }
+            #contenedor-busqueda button:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #contenedor-busqueda input {
+                position: absolute;
+                margin: 0 auto;
+                width: 60%;
+                height: 40px;
+                flex-shrink: 0;
+                border: none;
+                border-radius: 10px;
+                background: none;
+            }
+            #contenedor-busqueda input:focus {
+                outline: none;
+                border: 0;
+            }
+            .icono-lupa {
+                float: right;
+                padding: 10px 10px 10px 10px;
+            }
+            .icono-carrito {
+                float: left;
+                color: black;
+                margin-left: 10%;
+            }
+            #cabecera nav {
+                margin: 25px 0px;
+            }
+            #cabecera nav ul {
+                list-style-type: none;
+            }
+            #cabecera nav li {
+                margin-right: 15px;
+            }
+            #cabecera nav li img {
+                background-color: #EF8B1B;
+            }
+            #cabecera nav li a {
+                text-decoration-line: none;
+                color: white;
+                font-weight: 500;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                padding: 15px 20px;
+                margin: 10px 5px;
+            }
+            #cabecera nav li a:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #cabecera nav li a:hover img {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+
+            #configuracion-perfil {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+            #configuracion-carta {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 90%;
+                border-radius: 10px;
+                background: rgba(18, 19, 21, 0.80);
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                color: white;
+                padding: 15px;
+            }
+            #espacio-informacion-cli input {
+                border-radius: 10px;
+                background: #B8B8B8;
+                height: 30px;
+                width: 90%;
+                padding-left: 7px;
+                font-size: large;
+            }
+            #entrada-numero button {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                border-radius: 10px;
+                background: #EF8B1B;
+                height: 30px;
+                width: 25%;
+            }
+            #num-entrada {
+                width: 65% !important;
+            }
+            #espacio-password input {
+                border-radius: 10px;
+                background: #B8B8B8;
+                height: 30px;
+                width: 90%;
+                padding-left: 7px;
+                font-size: large;
+            }
+
+            /*Baner de abajo*/
+            #pies {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                bottom: 0;
+                left: 0;
+                margin: 0;
+                text-align: center;
+                background-color: rgba(18, 19, 21,0.8);
+                width: 100%;
+                height: 50px;
+                color: #866CBA;
+                font-weight: lighter;
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="cabecera">
+        <a href="{% url 'home' %}">
+            <img class="icono-letras" src="{% static 'usuarios/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'usuarios/imagenes/C-Buy Logo.png' %}" alt="">
+        </a>
+        <div class="barra-busqueda">
+            <div id="contenedor-busqueda">
+                <a href="{% url 'carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
+                <input type="text" placeholder="Buscar..." value="Computadoras">
+                <a href="{% url 'resultadoBusqueda' %}"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'registro_Usuario' %}">Registrarse</a></li>
+                <li><a href="{% url 'inicioDeSesion_usuario' %}"><img src="{% static 'usuarios/imagenes/Iniciar sesion.png' %}" alt="Inicio de sesion"></a></li>
+                <li><a href="{% url 'configuracion_usuario' %}"><span><img src="{% static 'usuarios/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <article id="main">
+
+        <div id="configuracion-perfil">
+            <h1>Configuraciones de datos de usuario</h1>
+            <div id="espacio-informacion-cli">
+                <div>
+                    <h4>Nombre</h4>
+                    <input type="text" value="Emiliano Rafael Mendoza Nava">
+                </div>
+                <div>
+                    <h4>Correo electronico</h4>
+                    <input type="text" value="emiliano@gmail.com"> 
+                </div>
+                <div>
+                    <h4>Número de teléfono</h4>
+                    <div id="entrada-numero">
+                        <button><img src="{% static 'usuarios/imagenes/image 23.png' %}" alt=""><i class="fa fa-angle-down" aria-hidden="true"></i></button>
+                        <input id="num-entrada" type="text" value="+52 612 229 4578">
+                    </div>
+                </div>
+            </div>
+            <div id="espacio-password">
+                <div>
+                    <h4>Contraseña</h4>
+                    <input type="password" value="soyUnaContrasena">
+                </div>
+                <div>
+                    <h4>Confirmar contraseña</h4>
+                    <input type="password" value="soyUnaContrasena">
+                </div>
+            </div>
+            <div id="espacio-direccion-envio">
+                <h4>Dirección de envio</h4>
+                <input type="text" value="México, B.C.S - La Paz, CP - 23095, #519. ">
+            </div>
+        </div>
+
+        <div id="configuracion-carta">
+            <h1>Mi cuenta</h1>
+            <img src="{% static 'usuarios/imagenes/image 21.png' %}" alt="">
+            <h4>Emiliano Rafael Mendoza Nava</h4>
+            <img id="mexico-bandera" src="{% static 'usuarios/imagenes/image 23.png' %}" alt="">
+            <button>Actualizar Datos</button>
+        </div>
+    </article>
+
+     <footer id="pies">
+        <a href="{% url 'home' %}">
+            <img class="icono-letras" src="{% static 'usuarios/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'usuarios/imagenes/C-Buy Logo 1.png' %}" alt="">
+        </a>
+    </footer>
+    {% block contenido %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,1341 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+   
+
+    <title>Resultado de busqueda</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /*HEADER*/
+        #cabecera {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            top: 0;
+            left: 0;
+            background: rgba(18, 19, 21, 0.80);
+        }
+        .icono-letras {
+            float: left;
+            width: 120px;
+            white-space: normal;
+            display: block;
+            padding: 30px 0px 20px 20px;
+        }
+        .icono-logo {  
+            float: left;
+            width: 80px;
+            white-space: normal;
+            display: block;
+        }
+        .barra-busqueda {
+            background-color: white;
+            width: 50%;
+            top: 25%;
+            float: left;
+            border: none;
+            border-radius: 10px;
+        }
+        #contenedor-busqueda button {
+            position: relative;
+            float: left;
+            width: 17%;
+            height: 40px;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            flex-shrink: 0;
+            font-size: 18px;
+            color: white;
+        }
+        #contenedor-busqueda button img {
+            position: absolute;
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+        }
+        #contenedor-busqueda button:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #contenedor-busqueda input {
+            float: left;
+            position: absolute;
+            margin: 0 auto;
+            width: 39%;
+            height: 50%;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 10px;
+            background: none;
+        }
+        #contenedor-busqueda input:focus {
+            outline: none;
+            border: 0;
+        }
+        .icono-lupa {
+            float: right;
+            padding: 10px 10px 10px 10px;
+        }
+        .icono-carrito {
+            float: left;
+            color: black;
+            margin-left: 10%;
+        }
+        #cabecera nav {
+            display: flex;
+            align-items: center;
+        }
+        #cabecera nav ul {
+            float: right;
+            margin: auto;
+            list-style-type: none;
+        }
+        #cabecera nav li {
+            display: inline;
+            margin-right: 15px;
+        }
+        #cabecera nav li img {
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+            background-color: #EF8B1B;
+        }
+        #cabecera nav li a {
+            text-decoration-line: none;
+            color: white;
+            font-weight: 500;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+        }
+        #cabecera nav li a:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #cabecera nav li a:hover img {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+
+        /*MAIN*/
+        #main {
+            position: absolute;
+            margin-top: 90px;
+        }
+        #migajas-pan {
+            width: 70%;
+            margin-left: 2%;
+        }
+        #migajas-pan a {
+            text-decoration-line: none;
+        }
+
+        #categorias{
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            float: left;
+            width: 22%;
+            border-radius: 10px;
+            background: rgba(18, 19, 21, 0.80);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            font-weight: 200;
+            margin: 10px 40px 10px 40px;
+            padding: 0px 0px 10px 10px;
+        }
+        #categorias h3 {
+            color: white;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            text-align: right;
+        }
+        #categorias ul li {
+            color: white;
+            list-style-type: none;
+            margin-bottom: 8px;
+        }
+
+        #grid-productos {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: baseline;
+            float: left;
+            width: 60%;
+            height: 100%;
+            padding: 10;
+        }
+        #grid-productos .pagina-navegacion-num {
+            width: 100%;
+            color: #EF8B1B;
+            text-align: center;
+            margin: 10px 20px;
+        }
+        .tarjeta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            border-radius: 10px;
+            background: rgba(18, 19, 21, 0.10);
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+            transition: 0.3s;
+            width: 20%;
+            height: 340px;
+            padding: 10px 10px 0px 10px;
+            margin-bottom: 10px;
+        }
+        .tarjeta:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        .tarjeta img {
+            background-size: cover;
+            position: relative;
+            display: flex;
+            flex-flow: row;
+            width: 100%;
+            height: 170px;
+        }
+        .tarjeta .botones-producto {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+        .boton-detalles {
+            text-decoration-line: none;
+            color: #000;
+            float: left;
+            text-align: center;
+            width: 70%;
+            border-radius: 15px;
+            border: 1px solid #000;
+        }
+        .botones-producto .boton-carrito {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            width: 25%;
+            float: left;
+            border-radius: 15px;
+            border: 1px solid #000;
+        }
+        .boton-comprar {
+            width: 100%;
+            margin: 10px 0px 5px 0px;
+            border-radius: 10px 10px 10px 10px;
+            border: 3px solid #000;
+        }
+        .estrellas {
+            display: flex;
+            float: left;
+        }
+        .insignea-oferta {
+            display: flex;
+        }
+        .insignea-oferta h5 {
+            border-radius: 15px 0px;
+            border: 1px solid #EF8B1B;
+            box-shadow: 1px 1px 4px 0px #EF8B1B;
+            padding: 0px 7px;
+        }
+        .precio-c-desc {
+            color: #EF8B1B;
+        }
+        .liston {
+            width: 60px;
+            font-size: 14px;
+            padding: 2px;
+            text-align: center;
+            border-radius: 25px;
+            transform: rotate(20deg);
+            background-color:#EF8B1B;
+            color: white;
+        }
+
+        /*Baner de abajo*/
+        #pies {
+            position: relative;
+            display: block;
+            bottom: 0;
+            left: 0;
+            margin: 0;
+            text-align: center;
+            background-color: rgba(18, 19, 21,0.8);
+            width: 100%;
+            color: #866CBA;
+            font-weight: lighter;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        @media screen and (max-width: 1024px) and (min-width: 360px){
+
+            #main {
+                position: absolute;
+                margin-top: 200px;
+            }
+            #cabecera {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 100%;
+                height: 200px;
+                top: 0;
+                left: 0;
+                background: rgba(18, 19, 21, 0.80);
+            }
+            .barra-busqueda {
+                background-color: white;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+            }
+            #contenedor-busqueda button {
+                position: relative;
+                float: left;
+                width: 30%;
+                height: 40px;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                flex-shrink: 0;
+                font-size: 18px;
+                color: white;
+            }
+            #contenedor-busqueda button:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #contenedor-busqueda input {
+                position: absolute;
+                margin: 0 auto;
+                width: 60%;
+                height: 40px;
+                flex-shrink: 0;
+                border: none;
+                border-radius: 10px;
+                background: none;
+            }
+            #contenedor-busqueda input:focus {
+                outline: none;
+                border: 0;
+            }
+            .icono-lupa {
+                float: right;
+                padding: 10px 10px 10px 10px;
+            }
+            .icono-carrito {
+                float: left;
+                color: black;
+                margin-left: 10%;
+            }
+            #cabecera nav {
+                margin: 25px 0px;
+            }
+            #cabecera nav ul {
+                list-style-type: none;
+            }
+            #cabecera nav li {
+                margin-right: 15px;
+            }
+            #cabecera nav li img {
+                background-color: #EF8B1B;
+            }
+            #cabecera nav li a {
+                text-decoration-line: none;
+                color: white;
+                font-weight: 500;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                padding: 15px 20px;
+                margin: 10px 5px;
+            }
+            #cabecera nav li a:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #cabecera nav li a:hover img {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+
+            #migajas-pan {
+                width: 98%;
+                margin-left: 1%;
+            }
+
+            #categorias{
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                flex-direction: column;
+                float: left;
+                width: 90%;
+                border-radius: 10px;
+                background: rgba(18, 19, 21, 0.80);
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                font-weight: 200;
+                margin: 10px;
+                padding: 0px 0px 10px 10px;
+            }
+
+            #grid-productos {
+                position: relative;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: baseline;
+                float: left;
+                width: 100%;
+                height: 100%;
+                padding: 10;
+            }
+
+            .tarjeta {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                border-radius: 10px;
+                background: rgba(18, 19, 21, 0.10);
+                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                transition: 0.3s;
+                width: 33%;
+                padding: 5px 5px 0px 5px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="cabecera">
+        <a href="{% url 'home' %}">
+            <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
+        </a>
+        <div class="barra-busqueda">
+            <div id="contenedor-busqueda">
+                <a href="{% url 'carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
+                <input type="text" placeholder="Buscar..." value="Computadoras">
+                <a href="{% url 'resultadoBusqueda' %}"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'registro_Usuario' %}">Registrarse</a></li>
+                <li><a href="{% url 'inicioDeSesion_usuario' %}"><img src="{% static 'momentos/imagenes/Iniciar sesion.png' %}" alt=""></a></li>
+                <li><a href="{% url 'configuracion_usuario' %}"><span><img src="{% static 'momentos/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <article id="main">
+        <div id="migajas-pan">
+            <h3><a href="{% url 'home' %}">Inicio</a> / <a href="{% url 'resultadoBusqueda' %}">Resultado de busqueda: 1,000 resultados</a></h3>
+        </div>
+        <div id="categorias">
+            <h3>Categoría</h3>
+            <ul>
+                <li>Electrónica (1,000)</li>
+                <li>Cómputo (1,000)</li>
+                <li>Consolas y videojuegos</li>
+                <li>Celulares (1,000)</li>
+                <li>Hogar y muebles (1,000)</li>
+                <li>Accesorios para celulares (1,000)</li>
+                <li>Deportes (1,000)</li>
+                <li>Ferreteria (1,000)</li>
+                <li>Relojes y joyería (1,000)</li>
+                <li>Juguetes (1,000)</li>
+                <li>Línea blanca (1,000)</li>
+                <li>Belleza y cuidado personal (1,000)</li>
+                <li>Automotriz y refacciones (1,000)</li>
+                <li>Cocina y electrodomésticos (1,000)</li>
+                <li>Instrumentos musicales (1,000)</li>
+                <li>Mujeres (1,000)</li>
+                <li>Bebés (1,000)</li>
+            </ul>
+        </div>
+        <div id="grid-productos">
+
+            <h4 class="pagina-navegacion-num"><i class="fa fa-chevron-left" aria-hidden="true"></i>
+                1  2  3  4  5  6  7  8  9 <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </h4>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (1).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i> 
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <span class="insignea-oferta"><h5>Oferta</h5></span>
+                </div>
+                <h4>Computadora Radeon V4</h4>
+                <h3 class="precio-c-desc">$14,000<span class="liston">-33%</span></h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto1" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito1" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (2).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora de escritorio DELL</h4>
+                <h3>$13,400</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto2" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito2" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+            
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (3).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora APPLE versión blanca</h4>
+                <h3>$21,000</h3>
+                <div class="botones-producto">
+                    <a  id="detallesProducto3" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a  id="proCarrito3" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (4).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Laptop HP última generación</h4>
+                <h3>$16,599</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto4" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito4" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (5).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora de escritorio HP</h4>
+                <h3>$19,000</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto5" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito5" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (1).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora de escritoio DELL V-JDSD5</h4>
+                <h3>$10,999</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto6" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a  id="proCarrito6" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (2).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora de escritoio Lenovo azul oscuro</h4>
+                <h3>$11,299</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto7" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito7" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (3).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora de escritoio Lenovo blanca</h4>
+                <h3>$13,999</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto8" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a  id="proCarrito8" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (4).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Laptop Razer negra</h4>
+                <h3>$13,899</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto9" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a  id="proCarrito9" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (5).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora HP ALL-IN-ONE blanca</h4>
+                <h3>$15,789</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto10" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito10" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (2).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora DELL negra V-99</h4>
+                <h3>$9,800</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto11" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito11" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+
+            <div class="tarjeta">
+                <img src="{% static 'momentos/imagenes/Computadora (3).png' %}" alt="">
+                <div class="estrellas">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </div>
+                <h4>Computadora ACER blanca perla</h4>
+                <h3>$12,599</h3>
+                <div class="botones-producto">
+                    <a id="detallesProducto12" class="boton-detalles" href="{% url 'detallesProducto' %}">Detalles</a>
+                    <a id="proCarrito12" class="boton-carrito"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <button class="boton-comprar">Comprar</button>
+            </div>
+            <footer id="pies">
+                <a href="{% url 'home' %}">
+                    <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+                    <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo 1.png' %}" alt="">
+                </a>
+            </footer>
+        </div>
+    </article>
+
+    <script>
+        /*
+        let productos = [
+            {
+                idproducto:1,
+                nomproducto:"Computadora Radeon V4",
+                precio:14000,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:2,
+                nomproducto:"Computadora de escritorio DELL",
+                precio:13400,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:3,
+                nomproducto:"Computadora APPLE versión blanca",
+                precio:21000,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:4,
+                nomproducto:"Laptop HP última generación",
+                precio:16599,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:5,
+                nomproducto:"Computadora de escritorio HP",
+                precio:19000,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:6,
+                nomproducto:"Computadora de escritoio DELL V-JDSD5",
+                precio:10999,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:7,
+                nomproducto:"Computadora de escritoio Lenovo azul oscuro",
+                precio:11299,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:8,
+                nomproducto:"Computadora de escritoio Lenovo blanca",
+                precio:13900,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:9,
+                nomproducto:"Laptop Razer negra",
+                precio:13899,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:10,
+                nomproducto:"Computadora HP ALL-IN-ONE blanca",
+                precio:15789,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:11,
+                nomproducto:"Computadora DELL negra V-99",
+                precio:9800,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+            {
+                idproducto:12,
+                nomproducto:"Computadora ACER blanca perla",
+                precio:12599,
+                descripcion:"Gran computadora para cualquier tipo de trabajos escolares y ámbito laboral"
+            },
+        ];
+            
+        // Procedimiento para el registro de los productos en el localStorage
+        let productosString = JSON.stringify(productos);
+        let getComputadoras = localStorage.getItem("computadoras");
+        //Comprueba si ya estan los productos en el localStorage
+        if (!getComputadoras) {
+            //Si no estan entonces lo mete al localStorage solo una vez
+            localStorage.setItem("computadoras",productosString);
+        }
+        //
+
+        let existeSesion = localStorage.getItem("sesion");
+        if (existeSesion) {
+            document.querySelector("#proCarrito1").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 1);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 1){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito2").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 2);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 2){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito3").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 3);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es su primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 3){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito4").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 4);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 4){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito5").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 5);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 5){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito6").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 6);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 6){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito7").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 7);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 7){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito8").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 8);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 8){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito9").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 9);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 9){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito10").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 10);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 10){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito11").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 11);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Se borro el carrito: solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 11){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+
+            document.querySelector("#proCarrito12").addEventListener('click',function() {
+                let sesionAbiertaBruto = localStorage.getItem("sesion");
+                let sesionAbierta = JSON.parse(sesionAbiertaBruto);
+
+                let clienteBruto = localStorage.getItem(sesionAbierta.correo);
+                let cliente = JSON.parse(clienteBruto);
+
+                let computadorasBruto = localStorage.getItem("computadoras");
+                let computadoras = JSON.parse(computadorasBruto);
+
+                let productoSeleccionado = computadoras.find(productoSeleccionado => productoSeleccionado.idproducto === 12);
+
+                if (!cliente.productosCarrito){
+                    cliente.productosCarrito = [];
+                    console.log("Solo debe pasar si es us primera vez comprando");
+                }
+
+                // Verifica si ya cuenta con el producto o si es la primera vez que lo agrega al carrito
+                let indiceProductoEnCarrito = -1;
+                for (let i = 0; i < cliente.productosCarrito.length; i++){
+                    if (cliente.productosCarrito[i].idproducto === 12){
+                        indiceProductoEnCarrito = i;
+                    }
+                }
+                if (indiceProductoEnCarrito !== -1){
+                    // Si lo tiene solamente le suma 1 más (para este doc html)
+                    cliente.productosCarrito[indiceProductoEnCarrito].cantidad = cliente.productosCarrito[indiceProductoEnCarrito].cantidad+1;
+                }else{
+                    // Si no lo tiene lo agrega por primera vez
+                    cliente.productosCarrito.unshift({idproducto: productoSeleccionado.idproducto, cantidad:1});
+                }
+
+                localStorage.setItem(sesionAbierta.correo, JSON.stringify(cliente))
+
+                alert("Se ha agregado 1 producto al carrito de "+sesionAbierta.nombre+".");
+
+            });
+        }else{
+            alert("¡Espera! Aún no haz iniciado sesión, por lo que no podrás acceder a las funcionalidades completas de los servicios de C-BUY");
+        }
+
+        // Funciones para decidir que datos poner en los detalles
+        document.querySelector("#detallesProducto1").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:1,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto2").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:2,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto3").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:3,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto4").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:4,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto5").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:5,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto6").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:6,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto7").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:7,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto8").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:8,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto9").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:9,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto10").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:10,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto11").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:11,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        document.querySelector("#detallesProducto12").addEventListener('click',function(){
+            let detallesProducto = {
+                idproducto:12,
+            }
+            localStorage.setItem("detallesDelProducto",JSON.stringify(detallesProducto));
+        });
+        */
+    </script>
+    {% block contenido %}
+    {% endblock %}
+</body>
+</html>

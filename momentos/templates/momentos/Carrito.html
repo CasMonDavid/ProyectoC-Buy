@@ -1,0 +1,707 @@
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <title>Carrito</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+        #cabecera {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            top: 0;
+            left: 0;
+            background: rgba(18, 19, 21, 0.80);
+        }
+        .icono-letras {
+            float: left;
+            width: 120px;
+            white-space: normal;
+            display: block;
+            padding: 30px 0px 20px 20px;
+        }
+        .icono-logo {  
+            float: left;
+            width: 80px;
+            white-space: normal;
+            display: block;
+        }
+        .barra-busqueda {
+            background-color: white;
+            width: 50%;
+            top: 25%;
+            float: left;
+            border: none;
+            border-radius: 10px;
+        }
+        #contenedor-busqueda button {
+            position: relative;
+            float: left;
+            width: 17%;
+            height: 40px;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            flex-shrink: 0;
+            font-size: 18px;
+            color: white;
+        }
+        #contenedor-busqueda button img {
+            position: absolute;
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+        }
+        #contenedor-busqueda button:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #contenedor-busqueda input {
+            float: left;
+            position: absolute;
+            margin: 0 auto;
+            width: 39%;
+            height: 50%;
+            flex-shrink: 0;
+            border: none;
+            border-radius: 10px;
+            background: none;
+        }
+        #contenedor-busqueda input:focus {
+            outline: none;
+            border: 0;
+        }
+        .icono-lupa {
+            float: right;
+            padding: 10px 10px 10px 10px;
+        }
+        .icono-carrito {
+            float: left;
+            color: black;
+            margin-left: 10%;
+        }
+        #cabecera nav {
+            display: flex;
+            align-items: center;
+        }
+        #cabecera nav ul {
+            float: right;
+            margin: auto;
+            list-style-type: none;
+        }
+        #cabecera nav li {
+            display: inline;
+            margin-right: 15px;
+        }
+        #cabecera nav li img {
+            left: 10px;
+            top: 25%;
+            width: 20px;
+            height: 20px;
+            background-color: #EF8B1B;
+        }
+        #cabecera nav li a {
+            text-decoration-line: none;
+            color: white;
+            font-weight: 500;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 10px;
+            padding: 15px 20px;
+        }
+        #cabecera nav li a:hover {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+        #cabecera nav li a:hover img {
+            background-color: #d67e1a;
+            transition: 0.3s;
+        }
+
+        #contenedor {
+            display: flex;
+            margin: 100px 10px 0 10px;
+        }
+
+        #cuadro-izquierdo, #cuadro-derecho {
+            margin: 10px; 
+            background: rgba(18, 19, 21, 0.80);
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 10px;
+        }
+
+        #cuadro-izquierdo {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            width: 70%;
+            height: auto;
+        }
+
+        #cuadro-derecho {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 30%; 
+            height: 500px; 
+            min-height: 400px;
+        }      
+
+        .titulo-carrito {
+            font-size: 24px; 
+            text-align: left;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            margin-top: 20px;
+            margin-left: 5%;
+            margin-bottom: 20px;
+        }
+
+        #vaciar-carrito {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 5px;
+            width: 120px;
+            height: 25px;
+            text-decoration: none;
+            padding: 5px;
+            text-align: center;
+            margin: 0px 0px 10px 10px;
+        }
+
+        .linea-separadora {
+            border-top: 1px solid white;
+            margin-top: 20px;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+        .linea-separadora2 {
+            border-top: 1px solid white; 
+            margin-top: 20px;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .producto {
+            display: flex;
+            margin: 10px 0; 
+        }
+
+        .precio-producto {
+            font-size: 26px; 
+            color: #EF8B1B;
+            margin-left: 5%;
+            margin-top: 40px;
+        }
+
+        .acciones-producto {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .boton-cantidad{
+            color: white;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 5px;
+            width: 90px;
+            height: 50px;
+            margin-left: 5%;
+            margin-top: 5%;
+        }
+        
+        .boton-eliminar{
+            color: white;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 5px;
+            width: 90px;
+            height: 50px;
+            margin-right: 5%;
+            margin-top: 5%;
+        }
+        
+        .subtotal{
+            margin-top: 10%;
+            margin-bottom: 2%;
+            color: white;
+            font-size: 30px;
+        }
+
+        .cantidad-productos{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            color: white;
+            font-size: 20px;
+        }
+
+        .linea-separadora3 {
+            border-top: 1px solid white; 
+            width: 80%; 
+        }
+
+        .titulo-confirmacion{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            color: white;
+            font-size: 20px;
+        }
+
+        .detalle-pago {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            color: white;
+            font-size: 20px; 
+        }
+
+        .titulo-total{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            color: white;
+            font-size: 20px;
+        }
+
+        #total{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            color: #EF8B1B;
+            font-size: 30px;
+        }
+
+        .boton-pago {
+            color: white;
+            font-size: larger;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+            height: 50px;
+            margin-top: 5%;
+        }
+
+        /* Modificanos hechas al estilo del documento 23/11/2023 */
+
+        .productos {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            border-top: 3px solid white;
+            border-bottom: 3px solid white;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        .imagenDelProducto {
+            margin-right: 15px;
+        }
+
+        .productos h3 {
+            color: white;
+            font-weight: 600;
+        }
+
+        .detallesProducto {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .detallesPrecio {
+            display: flex;
+            flex-direction: column;
+            color: white;   
+        }
+
+        .detallesPrecio h4 {
+            font-weight: lighter;
+        }
+
+        .btnEliminarPro {
+            color: white;
+            background-color: #EF8B1B;
+            border: none;
+            border-radius: 5px;
+            width: 150px;
+            height: 25px;
+            margin: 5px 0px;
+        }
+
+        #todosLosProductos {
+            width: 100%;
+        }
+
+        /**/
+
+        @media screen and (max-width: 1024px) and (min-width: 360px){
+            #cabecera {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                align-items: center;
+                width: 100%;
+                height: 200px;
+                top: 0;
+                left: 0;
+                background: rgba(18, 19, 21, 0.80);
+            }
+            .barra-busqueda {
+                background-color: white;
+                width: 100%;
+                border: none;
+                border-radius: 10px;
+            }
+            #contenedor-busqueda button {
+                position: relative;
+                float: left;
+                width: 30%;
+                height: 40px;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                flex-shrink: 0;
+                font-size: 18px;
+                color: white;
+            }
+            #contenedor-busqueda button:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #contenedor-busqueda input {
+                position: absolute;
+                margin: 0 auto;
+                width: 60%;
+                height: 40px;
+                flex-shrink: 0;
+                border: none;
+                border-radius: 10px;
+                background: none;
+            }
+            #contenedor-busqueda input:focus {
+                outline: none;
+                border: 0;
+            }
+            .icono-lupa {
+                float: right;
+                padding: 10px 10px 10px 10px;
+            }
+            .icono-carrito {
+                float: left;
+                color: black;
+                margin-left: 10%;
+            }
+            #cabecera nav {
+                margin: 25px 0px;
+            }
+            #cabecera nav ul {
+                list-style-type: none;
+            }
+            #cabecera nav li {
+                margin-right: 15px;
+            }
+            #cabecera nav li img {
+                background-color: #EF8B1B;
+            }
+            #cabecera nav li a {
+                text-decoration-line: none;
+                color: white;
+                font-weight: 500;
+                background-color: #EF8B1B;
+                border: none;
+                border-radius: 10px;
+                padding: 15px 20px;
+                margin: 10px 5px;
+            }
+            #cabecera nav li a:hover {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+            #cabecera nav li a:hover img {
+                background-color: #d67e1a;
+                transition: 0.3s;
+            }
+
+
+            #contenedor {
+                flex-direction: column;
+                margin: 200px 10px 0 10px;
+            }
+
+            #cuadro-izquierdo {
+                margin: 10px auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 100%;
+                height: auto;
+            }
+
+            #cuadro-derecho {
+                margin: 10px auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 100%; 
+                height: 500px; 
+                min-height: 400px;
+            }  
+
+            .titulo-carrito {
+                text-align: center;
+                margin-left: 0px;
+            }
+
+            .nombre-producto {
+                font-size: 18px; 
+                color: white;
+                margin-left: 5%;
+                margin-right: 10%;
+            }
+
+            .boton-cantidad {
+                width: 90px;
+                height: 50px;
+                margin-left: -110%;
+                margin-top: 15%;
+
+            }
+        
+            .boton-eliminar {
+                width: 90px;
+                height: 50px;
+                margin-right: 20%;
+                margin-top: 15%;
+            }
+
+            .boton-pago{
+                margin-top: 2%;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <header id="cabecera">
+        <a href="{% url 'home' %}">
+            <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+            <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
+        </a>
+        <div class="barra-busqueda">
+            <div id="contenedor-busqueda">
+                <a href="{% url 'carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
+                <input type="text" placeholder="Buscar..." value="Computadoras">
+                <a href="ResultadoBusqueda.html"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'registro_Usuario' %}">Registrarse</a></li>
+                <li><a href="{% url 'inicioDeSesion_usuario' %}"><img src="{% static 'momentos/imagenes/Iniciar sesion.png' %}" alt=""></a></li>
+                <li><a href="{% url 'configuracion_usuario' %}"><span><img src="{% static 'momentos/imagenes/Configuraciones.png' %}" alt=""></span></a></li>
+            </ul>
+        </nav>
+    </header>
+    <div id="contenedor">
+        <div id="cuadro-izquierdo">
+            <div class="titulo-carrito"><h3>Carrito</h3></div>
+            <div id="todosLosProductos"> <!-- Unica funcion de este <div> es guardar todos los "productos" -->
+
+            </div>
+            <a href="" id="vaciar-carrito">Vaciar carrito</a>
+        </div>
+        <div id="cuadro-derecho">
+            <div class="subtotal">Subtotal</div>
+            <div class="cantidad-productos">1 producto(s)</div>
+            <hr class="linea-separadora3">
+            <div class="titulo-confirmacion">Confirmación</div>
+            <div class="detalle-pago">
+                <span>Productos:</span>
+                <span id="totalProductos"></span>
+            </div>
+            <div class="detalle-pago">
+                <span>Envío:</span>
+                <span>$302.05</span>
+            </div>
+            <hr class="linea-separadora3">
+            <div class="titulo-total">Total</div>
+            <h3 id="total"></h3>
+            <button class="boton-pago">Realizar pago</button>
+        </div>
+    </div>
+
+    <div style="width: 100%; height: 300px; left: 0px; top: 2000px; position: absolute; background: rgba(18, 19, 21, 0.80); display: flex; align-items: flex-start; justify-content: center;">
+        <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
+        <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
+    </div>
+
+    <script>
+        /*
+        let sesionbruto = localStorage.getItem("sesion");
+
+        document.getElementById("todosLosProductos").innerHTML = "";
+
+        if (sesionbruto){
+            let sesion = JSON.parse(sesionbruto);
+
+            let clienteBruto = localStorage.getItem(sesion.correo);
+            let cliente = JSON.parse(clienteBruto);
+
+            let computadorasBruto = localStorage.getItem("computadoras");
+            let computadoras = JSON.parse(computadorasBruto);
+
+            var precioFinal = 0;
+
+            if (cliente.productosCarrito.length > 0){
+                for (let i=0;i < cliente.productosCarrito.length;i++){
+                    let idproducto = cliente.productosCarrito[i].idproducto;
+
+                    const divProducto = document.createElement("div");
+                    divProducto.setAttribute("class", "productos");
+
+                    const imgProducto = document.createElement("img");
+                    switch (idproducto){
+                        case 1:
+                        case 6:
+                            imgProducto.src = "assets/Computadora (1).png";
+                            break;
+                        case 2:
+                        case 7:
+                        case 11:
+                            imgProducto.src = "assets/Computadora (2).png";
+                            break;
+                        case 3:
+                        case 8:
+                        case 12:
+                            imgProducto.src = "assets/Computadora (3).png";
+                            break;
+                        case 4:
+                        case 9:
+                            imgProducto.src = "assets/Computadora (4).png";
+                            break;
+                        case 5:
+                        case 10:
+                            imgProducto.src = "assets/Computadora (5).png";
+                            break;
+                        default:
+                            alert("Condicion aun no hecha");
+                            break;
+                    }
+                    imgProducto.setAttribute("class", "imagenDelProducto");
+
+                    divProducto.appendChild(imgProducto);
+
+                    const divDetallesProducto = document.createElement("div");
+                    divDetallesProducto.setAttribute("class", "detallesProducto");
+
+                    divProducto.appendChild(divDetallesProducto);
+
+                    const h3NombreProducto = document.createElement("h3");
+                    h3NombreProducto.setAttribute("class", "nombreProducto");
+                    for (let j=0;j < computadoras.length;j++){
+                        if (idproducto === computadoras[j].idproducto){
+                            h3NombreProducto.textContent = computadoras[j].nomproducto;
+                        }
+                    }
+                    divDetallesProducto.appendChild(h3NombreProducto);
+
+                    const divDetallesPrecio = document.createElement("div");
+                    divDetallesPrecio.setAttribute("class", "detallesPrecio");
+
+                    divDetallesProducto.appendChild(divDetallesPrecio);
+
+                    const h4Cantidad = document.createElement("h4");
+                    h4Cantidad.textContent = "Cantidad: "+cliente.productosCarrito[i].cantidad;
+                    divDetallesPrecio.appendChild(h4Cantidad);
+
+                    const h4PrecioTotal = document.createElement("h4");
+                    for (let j=0;j < computadoras.length;j++){
+                        if (idproducto === computadoras[j].idproducto){
+                            h4PrecioTotal.textContent = "Precio total: $"+parseInt(parseInt(computadoras[j].precio)*parseInt(cliente.productosCarrito[i].cantidad));
+                            precioFinal = parseInt(precioFinal)+parseInt(parseInt(computadoras[j].precio)*parseInt(cliente.productosCarrito[i].cantidad));
+                        }
+                    }
+                    divDetallesPrecio.appendChild(h4PrecioTotal);
+
+                    const btnEliminarPro = document.createElement("button");
+                    btnEliminarPro.setAttribute("class", "btnEliminarPro");
+                    btnEliminarPro.setAttribute("id", "btnEliminarProducto"+i);
+                    btnEliminarPro.textContent = "Eliminar producto";
+                    btnEliminarPro.addEventListener('click', function(){
+                        cliente.productosCarrito.splice(i,1);
+                        localStorage.setItem(sesion.correo, JSON.stringify(cliente));
+                        location.reload();
+                        alert("¡Se elimino el producto del carrito con exito!")
+                    });
+
+                    divDetallesProducto.appendChild(btnEliminarPro);
+
+                    document.getElementById("todosLosProductos").appendChild(divProducto);
+
+                }
+            }
+            let spanTOTAL = document.getElementById("totalProductos");
+            spanTOTAL.textContent = "hola";
+            spanTOTAL.textContent = "$"+precioFinal;
+
+            let totalMasEnvio = document.getElementById("total");
+            totalMasEnvio.textContent = "$"+(parseFloat(precioFinal)+parseFloat(302.05));
+
+            document.querySelector(".boton-pago").addEventListener('click', function(){
+                if (cliente.productosCarrito.length > 0){
+                    alert("¡Su compra se ha realizado con éxito! llegara entre mañana y sabrá dios");
+                }else{
+                    alert("¡Ups lo sentimos! parece que su carrito luce un poco solitario");
+                }
+                cliente.productosCarrito.splice(0,99); // Elimina todo del carrito del cliente
+                localStorage.setItem(sesion.correo, JSON.stringify(cliente));
+                location.reload();
+            });
+
+            document.getElementById("vaciar-carrito").addEventListener('click', function(){
+                if (cliente.productosCarrito.length > 0){
+                    cliente.productosCarrito.splice(0,99); // Elimina todo del carrito del cliente
+                    localStorage.setItem(sesion.correo, JSON.stringify(cliente));
+                    location.reload();
+                }else{
+                    alert("No hay nada que eliminar");
+                }
+            });
+        }else{
+            alert("¡Espera! Aún no haz iniciado sesión, por lo que no podrás acceder a las funcionalidades completas de los servicios de C-BUY");
+        }*/
+    </script>
+    {% block contenido %}
+    {% endblock %}
+</body>
+</html>

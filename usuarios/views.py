@@ -28,6 +28,10 @@ def registro_form(request):
         form = formulario_Registro_Usuario(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Datos correctamente almacenados')
+        else:
+            messages.error(request, 'Datos ingresados no validos')
     cxt1 = {"form": form}
     return render(request, 'usuarios/Registro.html', cxt1)
+
+def configuracionUsuario_form(request):
+    return render(request, 'usuarios/ConfiguracionPerfil.html')
