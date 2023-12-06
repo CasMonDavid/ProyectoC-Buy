@@ -9,13 +9,16 @@ def login_form(request):
     if request.method == 'POST':
         form = formulario_Login_Usuario(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
+            username1 = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-
+            user = authenticate(username=username1, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('home')
+                request.session['sesionUsuario'] = username1
+                request.session.modified = True
+                nomUsuario = request.session.get('sesionUsuario', 'N/A')
+                messages.success(request, 'Bienvenido usuario: '+nomUsuario)
+                return redirect('momentos:home')
             else:
                 messages.error(request, 'Usuario y/o contraseña incorrectos')
             
@@ -31,7 +34,7 @@ def registro_form(request):
         else:
             messages.error(request, 'Datos ingresados no validos')
     cxt1 = {"form": form}
-    return render(request, 'usuarios/Registro.html', cxt1)
+    return render(request, 'usuarios/InicioDeSesion.html', cxt1)
 
 def configuracionUsuario_form(request):
     return render(request, 'usuarios/ConfiguracionPerfil.html')

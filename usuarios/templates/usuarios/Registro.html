@@ -129,7 +129,7 @@
 </head>
 <body>
     <header id="cabecera">
-        <a href="{% url 'home' %}" style="display:flex; justify-content:center; align-items:center;">
+        <a href="{% url 'momentos:home' %}" style="display:flex; justify-content:center; align-items:center;">
             <img class="icono-letras" src="{% static 'usuarios/imagenes/C-Buy.png' %}" alt="">
             <img class="icono-logo" src="{% static 'usuarios/imagenes/C-Buy Logo.png' %}" alt="">
         </a>
@@ -159,6 +159,7 @@
     </div>
 
     <script>
+        /*
         document.querySelector('.button-container button:last-child').addEventListener('click', function() {
             var nombre = document.querySelectorAll('.content input')[0].value;
             var apellidos = document.querySelectorAll('.content input')[1].value;
@@ -201,11 +202,11 @@
 
             alert('La cuenta se ha registrado con éxito.');
         });
-
+        */
     </script>
 
     <header id="subcabecera">
-        <a href="{% url 'home' %}" style="display:flex; justify-content:center; align-items:center;">
+        <a href="{% url 'momentos:home' %}" style="display:flex; justify-content:center; align-items:center;">
             <img class="icono-letras" src="{% static 'usuarios/imagenes/C-Buy.png' %}" alt="">
             <img class="icono-logo" src="{% static 'usuarios/imagenes/C-Buy Logo.png' %}" alt="">
         </a>

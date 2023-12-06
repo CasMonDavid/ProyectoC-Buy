@@ -231,15 +231,15 @@
 </head>
 <body>
     <header id="cabecera">
-        <a href="{% url 'home' %}">
+        <a href="{% url 'momentos:home' %}">
             <img class="icono-letras" src="{% static 'momentos/imagenes/C-Buy.png' %}" alt="">
             <img class="icono-logo" src="{% static 'momentos/imagenes/C-Buy Logo.png' %}" alt="">
         </a>
         <div class="barra-busqueda">
             <div id="contenedor-busqueda">
-                <a href="{% url 'carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
+                <a href="{% url 'momentos:carrito_usuario' %}"><button><i class="fa fa-shopping-cart icono-carrito" aria-hidden="true"></i>Carrito</button></a>
                 <input type="text" placeholder="Buscar..." value="Computadoras">
-                <a href="{% url 'resultadoBusqueda' %}"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
+                <a href="{% url 'momentos:resultadoBusqueda' %}"><i class="fa fa-search icono-lupa" aria-hidden="true"></i></a>
             </div>
         </div>
         <nav>
